@@ -1,5 +1,7 @@
-## Usage 
+
+## Usage
 ```
-chmod +x run_miner
-sh run_miner
+chmod +x scripts/run_miner
+python run_miner.py
+
 ```

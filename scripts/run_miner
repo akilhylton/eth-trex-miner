@@ -1,0 +1,22 @@
+#!/bin/bash
+
+TREX_LINUX="t-rex-0.20.3-linux.tar.gz"
+TREX_LINUX_URL="https://trex-miner.com/download/$TREX_LINUX"
+POOL_ADDRESS=$1
+WALLET_ADDRESS=$2
+
+mine() {
+	t-rex -a ethash stratum+tcp://$POOL_ADDRESS -u $WALLET_ADDRESS -p || echo "Usage: $ run_miner ru-eth.hiveon.net:4444 0x630c9eaea1085D7E8fD6B7E993Ad740d2Ea8b89f"
+}
+
+clean() {
+	ls  | grep -e "t-rex" -e ".sh" -e "^\c"| xargs rm
+}
+
+get_trex() {
+	if [ ! -f /usr/local/bin/t-rex ]; then
+		wget $TREX_LINUX_URL  && tar -xvf $TREX_LINUX && mv t-rex /usr/local/bin/ || echo "Error check if internet is connect!"
+	fi
+}
+
+get_trex && clean && mine
