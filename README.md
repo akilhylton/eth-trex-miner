@@ -1,2 +1,5 @@
-# eth-trex-miner
-Bash script for running a t-rex miner
+## Usage 
+```
+chmod +x run_miner
+sh run_miner
+```
