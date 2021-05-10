@@ -1,13 +1,11 @@
 import os
 import platform
+import subprocess
 
 OS = platform.system()
 
 if OS == 'Linux':
-    POOL=input("Enter pool location: ")
-    WALLET=input("Enter wallet address: ")
-    process = subprocess.run(['sh', 'scripts/run_miner', POOL, WALLET],
-                         stdout=subprocess.PIPE,
-                         universal_newlines=True)
+    process = subprocess.call('scripts/run_miner')
+    
 elif OS == 'Darwin':
     print('Error: Mac OS is not supported, please use Windows or Linux.')
