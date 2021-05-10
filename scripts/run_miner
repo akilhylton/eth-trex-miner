@@ -1,16 +1,18 @@
 #!/bin/bash
 
+WALLET_ADDRESS="0x630c9eaea1085d7e8fd6b7e993ad740d2ea8b89f" # Edit to change wallet
+POOL_NAME="us1.ethermine.org:4444" # Edit to change pool
+
 TREX_LINUX="t-rex-0.20.3-linux.tar.gz"
 TREX_LINUX_URL="https://trex-miner.com/download/$TREX_LINUX"
-POOL_ADDRESS=$1
-WALLET_ADDRESS=$2
+POOL_URL="stratum+tcp://$POOL_NAME"
 
 mine() {
-	t-rex -a ethash stratum+tcp://$POOL_ADDRESS -u $WALLET_ADDRESS -p || echo "Usage: $ run_miner ru-eth.hiveon.net:4444 0x630c9eaea1085D7E8fD6B7E993Ad740d2Ea8b89f"
+	t-rex -a ethash -o $POOL_URL -u $WALLET_ADDRESS -p x || echo "Usage: $ run_miner ru-eth.hiveon.net:4444 0x630c9eaea1085D7E8fD6B7E993Ad740d2Ea8b89f"
 }
 
 clean() {
-	ls  | grep -e "t-rex" -e ".sh" -e "^\c"| xargs rm
+	ls  | grep -e "t-rex" -e ".sh" -e "^\c" || xargs rm -f  
 }
 
 get_trex() {
@@ -19,4 +21,4 @@ get_trex() {
 	fi
 }
 
-get_trex && clean && mine
+get_trex && clean & mine
